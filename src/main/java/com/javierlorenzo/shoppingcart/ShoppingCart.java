@@ -1,19 +1,20 @@
 package com.javierlorenzo.shoppingcart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShoppingCart {
-    private Integer totalPrice = 0;
-    private Integer items = 0;
+    private final List<Item> items = new ArrayList<>();
 
     public Integer getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void add(int price) {
-        totalPrice += price;
-        items += 1;
+        return items.stream().reduce(0, (accumulator, item) -> accumulator + item.getPrice(), Integer::sum);
     }
 
     public Integer getTotalItems() {
-        return items;
+        return items.size();
+    }
+
+    public void add(Item item) {
+        items.add(item);
     }
 }
